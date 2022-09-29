@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Алёна Высоцкова](https://up.htmlacademy.ru/javascript/27/user/2107215).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Бабченко](https://htmlacademy.ru/profile/babtshe).
 
 ---
 
