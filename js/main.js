@@ -47,20 +47,6 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
-const LINK_NUMBERS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',];
-
-const shuffleArray = function(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const rnd = Math.floor(Math.random() * (i + 1));
-    const tmp = arr[i];
-
-    arr[i] = arr[rnd];
-    arr[rnd] = tmp;
-  }
-  return arr;
-};
-
-const arrayLink = shuffleArray(LINK_NUMBERS);
 
 function getArray(features) {
   const maxLength = features.length;
@@ -80,10 +66,11 @@ function getArray(features) {
 
 const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
 
+const creatAutorData = (index) => ({
+  avatar: `img/avatars/user${index.toString().padStart(2, '0')}.png`,
+});
+
 const createCard = () => ({
-  author: {
-    avatar: (`img/avatars/user${getRandomArrayElement(arrayLink)}.png`),
-  },
   offer: {
     title: 'Добро пожаловать в наше уютное жилье',
     address: (`${getRandomArbitrary(35.65000, 35.70000, 5)}, ${getRandomArbitrary(139.70000, 139.80000, 5)}`),
@@ -103,4 +90,10 @@ const createCard = () => ({
   }
 });
 
-Array.from({length: 10}, createCard);
+const creatOffer = (index) => ({
+  autor: creatAutorData (index),
+});
+
+const getOffers = Array.from({length: 10}, (_, index) => creatOffer(index + 1));
+
+const similarCards = Array.from({length: 10}, createCard);
