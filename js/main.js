@@ -61,7 +61,7 @@ function getArray(features) {
       array.push(el);
     }
   }
-  return array.join(', ');
+  return array;
 }
 
 const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
