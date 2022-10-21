@@ -1,3 +1,1 @@
-import {createOffers} from './create-offers.js';
-
-createOffers();
+import './popup.js';
