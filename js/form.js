@@ -1,15 +1,25 @@
-export function deactivePage () {
-  document.querySelector('#title').disabled = true;
-  document.querySelector('#address').disabled = true;
-  document.querySelector('#type').disabled = true;
+const adForm = document.querySelector('.ad-form');
+
+function disableElement(classElement) {
+  for (const item of classElement.children) {
+    item.disabled = true;
+  }
 }
 
-deactivePage ();
-
-export function activePage () {
-  document.querySelector('#title').disabled = false;
-  document.querySelector('#address').disabled = false;
-  document.querySelector('#type').disabled = false;
+export function deactivePage() {
+  disableElement(adForm);
 }
 
-activePage ();
+deactivePage();
+
+function enableElement(classElement) {
+  for (const item of classElement.children) {
+    item.disabled = false;
+  }
+}
+
+export function activePage() {
+  enableElement(adForm);
+}
+
+activePage();
