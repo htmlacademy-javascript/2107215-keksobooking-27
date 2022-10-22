@@ -2,7 +2,6 @@ const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const slider = document.querySelector('.ad-form__slider');
 
-
 function disableElement(classElement) {
   classElement.classList.add(`${classElement.classList[0]}--disabled`);
   for (const item of classElement.children) {
