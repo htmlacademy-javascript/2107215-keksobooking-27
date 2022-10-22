@@ -1,10 +1,10 @@
-export const TYPE_OF_HOUSING = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-  'hotel',
-];
+export const TYPE_OF_HOUSING = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
+};
 export const CHECKIN = [
   '12:00',
   '13:00',
