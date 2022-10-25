@@ -11,8 +11,6 @@ function setElementValue (element, classElement) {
   } else {
     classElement.remove();
   }
-
-  return classElement;
 }
 
 function setElementPrice (element, classElement) {
@@ -21,8 +19,6 @@ function setElementPrice (element, classElement) {
   } else {
     classElement.remove();
   }
-
-  return classElement;
 }
 
 function setElementCapacity (elementRooms, elementGuests, classElement) {
@@ -31,8 +27,6 @@ function setElementCapacity (elementRooms, elementGuests, classElement) {
   } else {
     classElement.remove();
   }
-
-  return classElement;
 }
 
 function setElementTime (elementCheckin, elementCheckout, classElement) {
@@ -41,8 +35,6 @@ function setElementTime (elementCheckin, elementCheckout, classElement) {
   } else {
     classElement.remove();
   }
-
-  return classElement;
 }
 
 function setElementAvatar (element, classElement) {
@@ -51,8 +43,6 @@ function setElementAvatar (element, classElement) {
   } else {
     classElement.remove();
   }
-
-  return classElement;
 }
 
 function setElementPhotos (arrayLength, element, classElements, classElement) {
