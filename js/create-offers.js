@@ -6,7 +6,7 @@ import {
 } from './util.js';
 
 import {
-  TYPE_OF_HOUSING,
+  typeOfHousing,
   CHECKIN,
   CHECKOUT,
   FEATURES,
@@ -28,7 +28,7 @@ const createCard = (index) => ({
     title: 'Добро пожаловать в наше уютное жилье',
     address: (`${getRandomArbitrary(LatCoordinate.MIN, LatCoordinate.MAX, DECIMAL_PLACES)}, ${getRandomArbitrary(LngCoordinate.MIN, LngCoordinate.MAX, DECIMAL_PLACES)}`),
     price: getRandomInt(PriceRange.MIN, PriceRange.MAX),
-    type: getRandomArrayElement(Object.values(TYPE_OF_HOUSING)),
+    type: getRandomArrayElement(Object.values(typeOfHousing)),
     rooms: getRandomInt(RoomsRange.MIN, RoomsRange.MAX),
     guests: getRandomInt(GuestsRange.MIN, GuestsRange.MAX),
     checkin: getRandomArrayElement(CHECKIN),

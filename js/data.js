@@ -1,10 +1,3 @@
-export const TYPE_OF_HOUSING = {
-  flat: 'Квартира',
-  bungalow: 'Бунгало',
-  house: 'Дом',
-  palace: 'Дворец',
-  hotel: 'Отель',
-};
 export const CHECKIN = [
   '12:00',
   '13:00',
@@ -31,6 +24,14 @@ export const PHOTOS = [
 
 export const OFFERS_COUNT = 10;
 export const DECIMAL_PLACES = 5;
+
+export const typeOfHousing = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
+};
 
 export const LatCoordinate = {
   MIN: 35.65,

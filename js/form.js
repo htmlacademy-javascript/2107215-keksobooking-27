@@ -1,6 +1,7 @@
-const adForm = document.querySelector('.ad-form');
+export const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const slider = document.querySelector('.ad-form__slider');
+
 
 function disableElement(classElement) {
   adForm.classList.add('ad-form--disabled');
