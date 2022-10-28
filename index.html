@@ -88,12 +88,15 @@
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="title">Заголовок объявления</label>
           <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио" required
-            data-pristine-required-message="Обязательное поле">
+            data-pristine-required-message="Обязательное поле"
+            data-pristine-minlength="30"
+            data-pristine-maxlength="100"
+            data-pristine-minlength-message="Минимальное значение 30 символов"
+            data-pristine-maxlength-message="Максимальное значение 100 символов">
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text" required readonly
-            data-pristine-required-message="Обязательное поле">
+          <input id="address" name="address" type="text" value="35.652832, 139.839478" required readonly>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
