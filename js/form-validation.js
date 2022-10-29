@@ -1,5 +1,4 @@
-import {adForm} from './form.js';
-
+const adForm = document.querySelector('.ad-form');
 const type = document.querySelector('#type');
 const price = document.querySelector('#price');
 const roomNumber = adForm.querySelector('#room_number');
@@ -28,7 +27,7 @@ const pristine = new Pristine(adForm, {
   errorTextParent: 'ad-form__element',
 },);
 
-function validatePrice() {
+function validateCapacity() {
   return guestsCapacity[roomNumber.value].includes(capacity.value);
 }
 function capacityErrorMessage() {
@@ -38,7 +37,7 @@ function capacityErrorMessage() {
 function validateMinPrice() {
   return TypesMinPrice[type.value] <= price.value;
 }
-function getMinPriceErrorMessage() {
+function minPriceErrorMessage() {
   return `Минимальная цена для выбранного типа жилья ${TypesMinPrice[type.value]} руб.`;
 }
 
@@ -54,8 +53,8 @@ timeout.addEventListener('change', () => {
   timein.value = timeout.value;
 });
 
-pristine.addValidator(roomNumber, validatePrice, capacityErrorMessage);
-pristine.addValidator(price, validateMinPrice, getMinPriceErrorMessage);
+pristine.addValidator(roomNumber, validateCapacity, capacityErrorMessage);
+pristine.addValidator(price, validateMinPrice, minPriceErrorMessage);
 
 adForm.addEventListener('submit', (evt)=>{
   evt.preventDefault();
