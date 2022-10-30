@@ -1,4 +1,4 @@
-export const adForm = document.querySelector('.ad-form');
+const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const slider = document.querySelector('.ad-form__slider');
 
