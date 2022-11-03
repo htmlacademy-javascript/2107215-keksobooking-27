@@ -21,12 +21,10 @@ function enableElement(classElement) {
 
 export function deactivePage() {
   disableElement(adForm);
-  disableElement(mapFilters);
   slider.setAttribute('disabled', true);
 }
 
 export function activePage() {
-  disableElement(mapFilters);
   enableElement(adForm);
   slider.removeAttribute('disabled');
 }
