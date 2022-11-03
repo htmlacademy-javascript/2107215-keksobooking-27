@@ -43,11 +43,11 @@ export const LngCoordinate = {
 };
 export const RoomsRange = {
   MIN: 1,
-  MAX: 10,
+  MAX: 3,
 };
 export const GuestsRange = {
   MIN: 1,
-  MAX: 10,
+  MAX: 3,
 };
 export const PriceRange = {
   MIN: 1,
