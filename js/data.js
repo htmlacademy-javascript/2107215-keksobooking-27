@@ -51,5 +51,5 @@ export const GuestsRange = {
 };
 export const PriceRange = {
   MIN: 1,
-  MAX: 10,
+  MAX: 100000,
 };

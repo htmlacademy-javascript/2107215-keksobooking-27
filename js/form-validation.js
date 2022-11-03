@@ -5,6 +5,7 @@ const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
 const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
+const slider = adForm.querySelector('.ad-form__slider');
 
 const guestsCapacity = {
   '1': ['1'],
@@ -62,4 +63,26 @@ adForm.addEventListener('submit', (evt)=>{
   if (isValid) {
     adForm.submit();
   }
+});
+
+noUiSlider.create(slider, {
+  range: {
+    min: 0,
+    max: 100000,
+  },
+  start: price.placeholder,
+  step: 1,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      return value.toFixed(0);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+});
+
+slider.noUiSlider.on('update', () => {
+  price.value = slider.noUiSlider.get();
 });

@@ -1,9 +1,6 @@
-import {createOffers} from './create-offers.js';
 import {createSentenceWithCount} from './util.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-const cardListFragment = document.createDocumentFragment();
-const createCard = createOffers();
 
 function setElementValue (element, classElement) {
   if (element) {
@@ -58,21 +55,22 @@ function setElementPhotos (arrayLength, element, classElements, classElement) {
   }
 }
 
-createCard.forEach((card) => {
+function getCard(point) {
+  const {author, offer} = point;
   const cardElement = cardTemplate.cloneNode(true);
   const avatarElement = cardElement.querySelector('.popup__avatar');
   const titleElement = cardElement.querySelector('.popup__title');
   const addressElement = cardElement.querySelector('.popup__text--address');
   const priceElement = cardElement.querySelector('.popup__text--price');
   const typeElement = cardElement.querySelector('.popup__type');
-  const rooms = createSentenceWithCount(card.offer.rooms, ['комната', 'комнаты', 'комнат']);
-  const guests = createSentenceWithCount(card.offer.guests, ['гостя', 'гостей']);
+  const rooms = createSentenceWithCount(offer.rooms, ['комната', 'комнаты', 'комнат']);
+  const guests = createSentenceWithCount(offer.guests, ['гостя', 'гостей']);
   const capacityElement = cardElement.querySelector('.popup__text--capacity');
   const timeElement = cardElement.querySelector('.popup__text--time');
 
   const cardListFeature = cardElement.querySelectorAll('.popup__feature');
   cardListFeature.forEach((featureListItem) => {
-    const isNecessary = card.offer.features.some(
+    const isNecessary = offer.features.some(
       (offerFeatures) => featureListItem.classList.contains(`popup__feature--${offerFeatures}`),
     );
     if (!isNecessary) {
@@ -84,16 +82,16 @@ createCard.forEach((card) => {
   const photoElements = cardElement.querySelector('.popup__photos');
   const photoElement = photoElements.querySelector('img');
 
-  setElementAvatar(card.author.avatar, avatarElement);
-  setElementValue(card.offer.title, titleElement);
-  setElementPrice(card.offer.price, priceElement);
-  setElementValue(card.offer.address, addressElement);
+  setElementAvatar(author.avatar, avatarElement);
+  setElementValue(offer.title, titleElement);
+  setElementPrice(offer.price, priceElement);
+  setElementValue(offer.address, addressElement);
   setElementCapacity(rooms, guests, capacityElement);
-  setElementTime(card.offer.checkin, card.offer.checkout, timeElement);
-  setElementValue(card.offer.type, typeElement);
-  setElementValue(card.offer.description, descriptionElement);
-  setElementPhotos(card.offer.photos.length, card.offer.photos, photoElements, photoElement);
-  cardListFragment.append(cardElement);
-});
+  setElementTime(offer.checkin, offer.checkout, timeElement);
+  setElementValue(offer.type, typeElement);
+  setElementValue(offer.description, descriptionElement);
+  setElementPhotos(offer.photos.length, offer.photos, photoElements, photoElement);
+  return cardElement;
+};
 
-document.querySelector('#map-canvas').append(cardListFragment);
+export{getCard};
