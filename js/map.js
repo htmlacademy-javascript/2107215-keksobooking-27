@@ -1,4 +1,4 @@
-import {getCard} from './popup.js'
+import {getCard} from './popup.js';
 
 const addressInput = document.querySelector('#address');
 
@@ -71,9 +71,9 @@ export const setOnMapLoad = (cd) => {
 
 export const setOnMainPinMove = () => {
   mainMarker.on('move', ({target}) => {
-  const newCoordinates = target.getLatLng();
-  setAddress(newCoordinates)
-  })
+    const newCoordinates = target.getLatLng();
+    setAddress(newCoordinates);
+  });
 };
 
 export const setAdPins = (offers) => {

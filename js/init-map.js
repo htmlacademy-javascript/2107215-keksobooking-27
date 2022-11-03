@@ -19,7 +19,7 @@ setOnMapLoad(() => {
   setOnMainPinMove();
   setAddress(DEFAULT_COORDS);
   activePage();
-  setAdPins(offers)
-})
+  setAdPins(offers);
+});
 
 initMap(DEFAULT_COORDS);

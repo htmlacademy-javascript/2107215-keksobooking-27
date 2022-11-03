@@ -92,6 +92,6 @@ function getCard(point) {
   setElementValue(offer.description, descriptionElement);
   setElementPhotos(offer.photos.length, offer.photos, photoElements, photoElement);
   return cardElement;
-};
+}
 
 export{getCard};
