@@ -55,7 +55,7 @@ function setElementPhotos (arrayLength, element, classElements, classElement) {
   }
 }
 
-function getCard(point) {
+export function getCard(point) {
   const {author, offer} = point;
   const cardElement = cardTemplate.cloneNode(true);
   const avatarElement = cardElement.querySelector('.popup__avatar');
@@ -93,5 +93,3 @@ function getCard(point) {
   setElementPhotos(offer.photos.length, offer.photos, photoElements, photoElement);
   return cardElement;
 }
-
-export{getCard};
