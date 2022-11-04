@@ -1,9 +1,11 @@
 import {getCard} from './popup.js';
 
-const addressInput = document.querySelector('#address');
-
+const OFFERS_COUNT = 10;
 const ZOOM_DEFAULT = 10;
 const COORDS_DIGITS = 5;
+
+const addressInput = document.querySelector('#address');
+
 const map = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(map);
 
@@ -78,5 +80,5 @@ export const setOnMainPinMove = () => {
 
 export const setAdPins = (offers) => {
   markerGroup.clearLayers();
-  createAdPinMarkers(offers.slice(0, ZOOM_DEFAULT));
+  createAdPinMarkers(offers.slice(0, OFFERS_COUNT));
 };

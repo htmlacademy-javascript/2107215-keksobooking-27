@@ -31,8 +31,12 @@ const pristine = new Pristine(adForm, {
 function validateCapacity() {
   return guestsCapacity[roomNumber.value].includes(capacity.value);
 }
-function capacityErrorMessage() {
+function roomNumberErrorMessage() {
   return 'Количество гостей не соответствует количеству комнат';
+}
+
+function capacityErrorMessage() {
+  return 'Недопустимое количество гостей';
 }
 
 function validateMinPrice() {
@@ -42,7 +46,9 @@ function minPriceErrorMessage() {
   return `Минимальная цена для выбранного типа жилья ${TypesMinPrice[type.value]} руб.`;
 }
 
+
 capacity.addEventListener('change', () => pristine.validate(roomNumber));
+roomNumber.addEventListener('change', () => pristine.validate(capacity));
 type.addEventListener('change', () => {
   price.placeholder = TypesMinPrice[type.value];
   pristine.validate(price);
@@ -54,7 +60,8 @@ timeout.addEventListener('change', () => {
   timein.value = timeout.value;
 });
 
-pristine.addValidator(roomNumber, validateCapacity, capacityErrorMessage);
+pristine.addValidator(capacity, validateCapacity, capacityErrorMessage);
+pristine.addValidator(roomNumber, validateCapacity, roomNumberErrorMessage);
 pristine.addValidator(price, validateMinPrice, minPriceErrorMessage);
 
 adForm.addEventListener('submit', (evt)=>{
@@ -70,8 +77,8 @@ noUiSlider.create(slider, {
     min: 0,
     max: 100000,
   },
-  start: price.placeholder,
-  step: 1,
+  start: 1000,
+  step: 1000,
   connect: 'lower',
   format: {
     to: function (value) {
@@ -83,6 +90,6 @@ noUiSlider.create(slider, {
   },
 });
 
-slider.noUiSlider.on('update', () => {
+slider.noUiSlider.on('slide', () => {
   price.value = slider.noUiSlider.get();
 });
