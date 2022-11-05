@@ -22,8 +22,15 @@ export const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
+export const ZOOM_DEFAULT = 10;
+export const COORDS_DIGITS = 5;
 export const OFFERS_COUNT = 10;
 export const DECIMAL_PLACES = 5;
+
+export const DEFAULT_COORDS = {
+  lat: 35.68256,
+  lng: 139.75114
+};
 
 export const typeOfHousing = {
   flat: 'Квартира',

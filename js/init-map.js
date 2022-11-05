@@ -10,11 +10,7 @@ import {
   setAddress,
   setAdPins
 } from './map.js';
-
-const DEFAULT_COORDS = {
-  lat: 35.68256,
-  lng: 139.75114
-};
+import {DEFAULT_COORDS} from './data.js';
 
 const offers = createOffers();
 

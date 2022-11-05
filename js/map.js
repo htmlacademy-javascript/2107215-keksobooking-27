@@ -1,8 +1,8 @@
 import {getCard} from './popup.js';
-
-const OFFERS_COUNT = 10;
-const ZOOM_DEFAULT = 10;
-const COORDS_DIGITS = 5;
+import {
+  ZOOM_DEFAULT,
+  COORDS_DIGITS
+} from './data.js';
 
 const addressInput = document.querySelector('#address');
 
@@ -80,5 +80,5 @@ export const setOnMainPinMove = () => {
 
 export const setAdPins = (offers) => {
   markerGroup.clearLayers();
-  createAdPinMarkers(offers.slice(0, OFFERS_COUNT));
+  createAdPinMarkers(offers);
 };
