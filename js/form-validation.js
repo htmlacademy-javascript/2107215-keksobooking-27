@@ -5,6 +5,7 @@ const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
 const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
+const slider = adForm.querySelector('.ad-form__slider');
 
 const guestsCapacity = {
   '1': ['1'],
@@ -30,8 +31,12 @@ const pristine = new Pristine(adForm, {
 function validateCapacity() {
   return guestsCapacity[roomNumber.value].includes(capacity.value);
 }
-function capacityErrorMessage() {
+function roomNumberErrorMessage() {
   return 'Количество гостей не соответствует количеству комнат';
+}
+
+function capacityErrorMessage() {
+  return 'Недопустимое количество гостей';
 }
 
 function validateMinPrice() {
@@ -41,7 +46,9 @@ function minPriceErrorMessage() {
   return `Минимальная цена для выбранного типа жилья ${TypesMinPrice[type.value]} руб.`;
 }
 
+
 capacity.addEventListener('change', () => pristine.validate(roomNumber));
+roomNumber.addEventListener('change', () => pristine.validate(capacity));
 type.addEventListener('change', () => {
   price.placeholder = TypesMinPrice[type.value];
   pristine.validate(price);
@@ -53,7 +60,8 @@ timeout.addEventListener('change', () => {
   timein.value = timeout.value;
 });
 
-pristine.addValidator(roomNumber, validateCapacity, capacityErrorMessage);
+pristine.addValidator(capacity, validateCapacity, capacityErrorMessage);
+pristine.addValidator(roomNumber, validateCapacity, roomNumberErrorMessage);
 pristine.addValidator(price, validateMinPrice, minPriceErrorMessage);
 
 adForm.addEventListener('submit', (evt)=>{
@@ -62,4 +70,26 @@ adForm.addEventListener('submit', (evt)=>{
   if (isValid) {
     adForm.submit();
   }
+});
+
+noUiSlider.create(slider, {
+  range: {
+    min: 0,
+    max: 100000,
+  },
+  start: 1000,
+  step: 1000,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      return value.toFixed(0);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+});
+
+slider.noUiSlider.on('slide', () => {
+  price.value = slider.noUiSlider.get();
 });
