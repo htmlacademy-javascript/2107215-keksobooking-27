@@ -1,5 +1,5 @@
 function getData(onSuccess, onFail) {
-  fetch('https://27.javascrip.pages.academy/keksobooking/data')
+  fetch('https://27.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
     .then((cards) => onSuccess(cards))
     .catch(() => onFail());
