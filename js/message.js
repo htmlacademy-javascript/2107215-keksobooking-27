@@ -54,7 +54,7 @@ function showAlert(message) {
   alertContainer.style.padding = '40px 75px';
   alertContainer.style.backgroundColor = 'white';
   alertContainer.style.borderRadius = '2px';
-  alertContainer.style.border = '3px solid #ffaa99';
+  alertContainer.style.border = '3px solid #fd8871';
   alertContainer.style.fontSize = '30px';
   alertContainer.textContent = message;
   document.body.append(alertContainer);
