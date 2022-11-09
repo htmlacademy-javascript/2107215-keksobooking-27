@@ -1,3 +1,8 @@
+import {sendData} from './api.js';
+import {showMessage, showErrorMessage} from './message.js';
+import {setAddress, resetMarker} from './map.js';
+import {DEFAULT_COORDS} from './data.js';
+
 const adForm = document.querySelector('.ad-form');
 const type = document.querySelector('#type');
 const price = document.querySelector('#price');
@@ -6,6 +11,8 @@ const capacity = adForm.querySelector('#capacity');
 const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
 const slider = adForm.querySelector('.ad-form__slider');
+const submitButton = adForm.querySelector('.ad-form__submit');
+const resetButton = adForm.querySelector('.ad-form__reset');
 
 const guestsCapacity = {
   '1': ['1'],
@@ -64,11 +71,40 @@ pristine.addValidator(capacity, validateCapacity, capacityErrorMessage);
 pristine.addValidator(roomNumber, validateCapacity, roomNumberErrorMessage);
 pristine.addValidator(price, validateMinPrice, minPriceErrorMessage);
 
+function onResetButtonClick(evt) {
+  evt.preventDefault();
+  resetForm();
+}
+
+resetButton.addEventListener('click', (evt) => onResetButtonClick(evt));
+
+const resetForm = () => {
+  adForm.reset();
+  slider.noUiSlider.set(0);
+  price.placeholder = TypesMinPrice[type.value];
+  pristine.reset();
+  setAddress(DEFAULT_COORDS);
+  resetMarker(DEFAULT_COORDS);
+};
+
+
 adForm.addEventListener('submit', (evt)=>{
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {
-    adForm.submit();
+    submitButton.disabled = true;
+    sendData(
+      () => {
+        showMessage();
+        resetForm();
+        submitButton.disabled = false;
+      },
+      () => {
+        showErrorMessage();
+        submitButton.disabled = false;
+      },
+      new FormData(evt.target)
+    );
   }
 });
 
@@ -93,3 +129,4 @@ noUiSlider.create(slider, {
 slider.noUiSlider.on('slide', () => {
   price.value = slider.noUiSlider.get();
 });
+

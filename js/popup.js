@@ -42,12 +42,12 @@ function setElementAvatar (element, classElement) {
   }
 }
 
-function setElementPhotos (arrayLength, element, classElements, classElement) {
-  if(!arrayLength) {
+function setElementPhotos (element, classElements, classElement) {
+  if(!element.length) {
     classElements.remove();
   } else {
     classElement.remove();
-    for(let i = 0; i < arrayLength; i++) {
+    for(let i = 0; i < element.length; i++) {
       const photo = classElement.cloneNode(true);
       photo.src = element[i];
       classElements.append(photo);
@@ -55,7 +55,7 @@ function setElementPhotos (arrayLength, element, classElements, classElement) {
   }
 }
 
-export function getCard(point) {
+function getCard(point) {
   const {author, offer} = point;
   const cardElement = cardTemplate.cloneNode(true);
   const avatarElement = cardElement.querySelector('.popup__avatar');
@@ -67,8 +67,10 @@ export function getCard(point) {
   const guests = createSentenceWithCount(offer.guests, ['гостя', 'гостей']);
   const capacityElement = cardElement.querySelector('.popup__text--capacity');
   const timeElement = cardElement.querySelector('.popup__text--time');
+  const featuresElement = cardElement.querySelector('.popup__features');
+  if (offer.features) {
+  const cardListFeature = featuresElement.querySelectorAll('.popup__feature');
 
-  const cardListFeature = cardElement.querySelectorAll('.popup__feature');
   cardListFeature.forEach((featureListItem) => {
     const isNecessary = offer.features.some(
       (offerFeatures) => featureListItem.classList.contains(`popup__feature--${offerFeatures}`),
@@ -77,6 +79,9 @@ export function getCard(point) {
       featureListItem.remove();
     }
   });
+  } else {
+    featuresElement.remove();
+  }
 
   const descriptionElement = cardElement.querySelector('.popup__description');
   const photoElements = cardElement.querySelector('.popup__photos');
@@ -90,6 +95,8 @@ export function getCard(point) {
   setElementTime(offer.checkin, offer.checkout, timeElement);
   setElementValue(offer.type, typeElement);
   setElementValue(offer.description, descriptionElement);
-  setElementPhotos(offer.photos.length, offer.photos, photoElements, photoElement);
+  setElementPhotos(offer.photos, photoElements, photoElement);
   return cardElement;
 }
+
+export {getCard};
