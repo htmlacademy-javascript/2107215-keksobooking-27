@@ -1,22 +1,15 @@
 const ALERT_SHOW_TIME = 10000;
-let successSubmitMessage;
-let errorSubmitMessage;
 
-successSubmitMessage = document.querySelector('#success')
+const successSubmitMessage = document.querySelector('#success')
   .content
   .querySelector('.success')
   .cloneNode(true);
 
-errorSubmitMessage = document.querySelector('#error')
+const errorSubmitMessage = document.querySelector('#error')
   .content
   .querySelector('.error')
   .cloneNode(true);
 
-const showMessage = () => {
-  document.body.append(successSubmitMessage);
-  successSubmitMessage.addEventListener('click', closeMessageClick);
-  document.addEventListener('keydown', messageEscKeydown);
-};
 const closeMessageClick = () => {
   successSubmitMessage.remove();
   successSubmitMessage.removeEventListener('click', closeMessageClick);
@@ -28,12 +21,12 @@ function messageEscKeydown (evt) {
     closeMessageClick();
   }
 }
-
-const showErrorMessage = () => {
-  document.body.append(errorSubmitMessage);
-  document.addEventListener('keydown', errorMessageEscKeydown);
-  errorSubmitMessage.addEventListener('click', errorMessageClick);
+const showMessage = () => {
+  document.body.append(successSubmitMessage);
+  successSubmitMessage.addEventListener('click', closeMessageClick);
+  document.addEventListener('keydown', messageEscKeydown);
 };
+
 const errorMessageClick = () => {
   errorSubmitMessage.remove();
   document.removeEventListener('keydown', errorMessageEscKeydown);
@@ -45,6 +38,12 @@ function errorMessageEscKeydown (evt) {
     errorMessageClick();
   }
 }
+const showErrorMessage = () => {
+  document.body.append(errorSubmitMessage);
+  errorSubmitMessage.addEventListener('click', errorMessageClick);
+  document.addEventListener('keydown', errorMessageEscKeydown);
+};
+
 
 function showAlert(message) {
   const alertContainer = document.createElement('div');

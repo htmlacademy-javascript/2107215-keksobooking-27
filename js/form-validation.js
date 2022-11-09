@@ -53,7 +53,7 @@ function minPriceErrorMessage() {
   return `Минимальная цена для выбранного типа жилья ${TypesMinPrice[type.value]} руб.`;
 }
 
-
+resetButton.addEventListener('click', (evt) => onResetButtonClick(evt));
 capacity.addEventListener('change', () => pristine.validate(roomNumber));
 roomNumber.addEventListener('change', () => pristine.validate(capacity));
 type.addEventListener('change', () => {
@@ -71,13 +71,6 @@ pristine.addValidator(capacity, validateCapacity, capacityErrorMessage);
 pristine.addValidator(roomNumber, validateCapacity, roomNumberErrorMessage);
 pristine.addValidator(price, validateMinPrice, minPriceErrorMessage);
 
-function onResetButtonClick(evt) {
-  evt.preventDefault();
-  resetForm();
-}
-
-resetButton.addEventListener('click', (evt) => onResetButtonClick(evt));
-
 const resetForm = () => {
   adForm.reset();
   slider.noUiSlider.set(0);
@@ -87,6 +80,10 @@ const resetForm = () => {
   resetMarker(DEFAULT_COORDS);
 };
 
+function onResetButtonClick(evt) {
+  evt.preventDefault();
+  resetForm();
+}
 
 adForm.addEventListener('submit', (evt)=>{
   evt.preventDefault();

@@ -69,16 +69,16 @@ function getCard(point) {
   const timeElement = cardElement.querySelector('.popup__text--time');
   const featuresElement = cardElement.querySelector('.popup__features');
   if (offer.features) {
-  const cardListFeature = featuresElement.querySelectorAll('.popup__feature');
+    const cardListFeature = featuresElement.querySelectorAll('.popup__feature');
 
-  cardListFeature.forEach((featureListItem) => {
-    const isNecessary = offer.features.some(
-      (offerFeatures) => featureListItem.classList.contains(`popup__feature--${offerFeatures}`),
-    );
-    if (!isNecessary) {
-      featureListItem.remove();
-    }
-  });
+    cardListFeature.forEach((featureListItem) => {
+      const isNecessary = offer.features.some(
+        (offerFeatures) => featureListItem.classList.contains(`popup__feature--${offerFeatures}`),
+      );
+      if (!isNecessary) {
+        featureListItem.remove();
+      }
+    });
   } else {
     featuresElement.remove();
   }
