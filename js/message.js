@@ -10,52 +10,54 @@ const errorSubmitMessage = document.querySelector('#error')
   .querySelector('.error')
   .cloneNode(true);
 
-const closeMessageClick = () => {
+const onCloseMessageClick = () => {
   successSubmitMessage.remove();
-  successSubmitMessage.removeEventListener('click', closeMessageClick);
-  document.removeEventListener('keydown', messageEscKeydown);
+  successSubmitMessage.removeEventListener('click', onCloseMessageClick);
+  document.removeEventListener('keydown', onMessageEscKeydown);
 };
-function messageEscKeydown (evt) {
+function onMessageEscKeydown (evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    closeMessageClick();
+    onCloseMessageClick();
   }
 }
 const showMessage = () => {
   document.body.append(successSubmitMessage);
-  successSubmitMessage.addEventListener('click', closeMessageClick);
-  document.addEventListener('keydown', messageEscKeydown);
+  successSubmitMessage.addEventListener('click', onCloseMessageClick);
+  document.addEventListener('keydown', onMessageEscKeydown);
 };
 
-const errorMessageClick = () => {
+const onErrorMessageClick = () => {
   errorSubmitMessage.remove();
-  document.removeEventListener('keydown', errorMessageEscKeydown);
-  errorSubmitMessage.removeEventListener('click', errorMessageClick);
+  document.removeEventListener('keydown', onErrorMessageEscKeydown);
+  errorSubmitMessage.removeEventListener('click', onErrorMessageClick);
 };
-function errorMessageEscKeydown (evt) {
+function onErrorMessageEscKeydown (evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    errorMessageClick();
+    onErrorMessageClick();
   }
 }
 const showErrorMessage = () => {
   document.body.append(errorSubmitMessage);
-  errorSubmitMessage.addEventListener('click', errorMessageClick);
-  document.addEventListener('keydown', errorMessageEscKeydown);
+  errorSubmitMessage.addEventListener('click', onErrorMessageClick);
+  document.addEventListener('keydown', onErrorMessageEscKeydown);
 };
-
 
 function showAlert(message) {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = '100';
-  alertContainer.style.right = 0;
-  alertContainer.style.bottom = 0;
+  alertContainer.style.zIndex = '9999';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
   alertContainer.style.position = 'fixed';
-  alertContainer.style.padding = '40px 75px';
+  alertContainer.style.paddingTop = '28px';
+  alertContainer.style.paddingBottom = '28px';
+  alertContainer.style.width = '100%';
   alertContainer.style.backgroundColor = 'white';
   alertContainer.style.borderRadius = '2px';
   alertContainer.style.border = '3px solid #fd8871';
   alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
   alertContainer.textContent = message;
   document.body.append(alertContainer);
 

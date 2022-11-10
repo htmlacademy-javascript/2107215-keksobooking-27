@@ -1,6 +1,6 @@
 import {sendData} from './api.js';
 import {showMessage, showErrorMessage} from './message.js';
-import {setAddress, resetMarker} from './map.js';
+import {setAddress, resetMarker, map} from './map.js';
 import {DEFAULT_COORDS} from './data.js';
 
 const adForm = document.querySelector('.ad-form');
@@ -78,6 +78,7 @@ const resetForm = () => {
   pristine.reset();
   setAddress(DEFAULT_COORDS);
   resetMarker(DEFAULT_COORDS);
+  map.closePopup();
 };
 
 function resetButtonClick(evt) {

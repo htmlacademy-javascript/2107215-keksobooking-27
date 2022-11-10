@@ -64,8 +64,8 @@ const setAddress = ({lat, lng}) => {
   addressInput.value = `${lat.toFixed(COORDS_DIGITS)}, ${lng.toFixed(COORDS_DIGITS)}`;
 };
 
-const setOnMapLoad = (cd) => {
-  map.on('load', cd);
+const setOnMapLoad = (cb) => {
+  map.on('load', cb);
 };
 
 const setOnMainPinMove = () => {
@@ -85,6 +85,10 @@ const resetMarker = (defaultCoords) => {
     lat: defaultCoords.lat,
     lng: defaultCoords.lng
   });
+  map.setView({
+    lat: defaultCoords.lat,
+    lng: defaultCoords.lng
+  }, ZOOM_DEFAULT);
 };
 
-export {initMap, setAddress, setOnMapLoad, setOnMainPinMove, setAdPins, resetMarker};
+export {initMap, setAddress, setOnMapLoad, setOnMainPinMove, setAdPins, resetMarker, map};
