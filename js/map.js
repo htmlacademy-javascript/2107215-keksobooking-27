@@ -1,7 +1,7 @@
 import {getCard} from './popup.js';
 import {ZOOM_DEFAULT, COORDS_DIGITS} from './data.js';
 
-const addressInput = document.querySelector('#address');
+const address = document.querySelector('#address');
 
 const map = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(map);
@@ -61,7 +61,7 @@ const createAdPinMarkers = (offers) => {
 };
 
 const setAddress = ({lat, lng}) => {
-  addressInput.value = `${lat.toFixed(COORDS_DIGITS)}, ${lng.toFixed(COORDS_DIGITS)}`;
+  address.value = `${lat.toFixed(COORDS_DIGITS)}, ${lng.toFixed(COORDS_DIGITS)}`;
 };
 
 const setOnMapLoad = (cb) => {
