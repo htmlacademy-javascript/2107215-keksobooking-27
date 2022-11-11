@@ -42,54 +42,61 @@ function setElementAvatar (element, classElement) {
   }
 }
 
-function setElementPhotos (arrayLength, element, classElements, classElement) {
-  if(!arrayLength) {
+function setElementPhotos (element, classElements) {
+  if(!element) {
     classElements.remove();
   } else {
-    classElement.remove();
-    for(let i = 0; i < arrayLength; i++) {
-      const photo = classElement.cloneNode(true);
+    const photoElement = classElements.querySelector('img');
+    photoElement.remove();
+    for(let i = 0; i < element.length; i++) {
+      const photo = photoElement.cloneNode(true);
       photo.src = element[i];
       classElements.append(photo);
     }
   }
 }
 
-export function getCard(point) {
+function getCard(point) {
   const {author, offer} = point;
-  const cardElement = cardTemplate.cloneNode(true);
-  const avatarElement = cardElement.querySelector('.popup__avatar');
-  const titleElement = cardElement.querySelector('.popup__title');
-  const addressElement = cardElement.querySelector('.popup__text--address');
-  const priceElement = cardElement.querySelector('.popup__text--price');
-  const typeElement = cardElement.querySelector('.popup__type');
+  const card = cardTemplate.cloneNode(true);
+  const avatar = card.querySelector('.popup__avatar');
+  const title = card.querySelector('.popup__title');
+  const address = card.querySelector('.popup__text--address');
+  const price = card.querySelector('.popup__text--price');
+  const type = card.querySelector('.popup__type');
   const rooms = createSentenceWithCount(offer.rooms, ['комната', 'комнаты', 'комнат']);
   const guests = createSentenceWithCount(offer.guests, ['гостя', 'гостей']);
-  const capacityElement = cardElement.querySelector('.popup__text--capacity');
-  const timeElement = cardElement.querySelector('.popup__text--time');
+  const capacity = card.querySelector('.popup__text--capacity');
+  const time = card.querySelector('.popup__text--time');
+  const features = card.querySelector('.popup__features');
+  if (offer.features) {
+    const cardListFeature = features.querySelectorAll('.popup__feature');
 
-  const cardListFeature = cardElement.querySelectorAll('.popup__feature');
-  cardListFeature.forEach((featureListItem) => {
-    const isNecessary = offer.features.some(
-      (offerFeatures) => featureListItem.classList.contains(`popup__feature--${offerFeatures}`),
-    );
-    if (!isNecessary) {
-      featureListItem.remove();
-    }
-  });
+    cardListFeature.forEach((featureListItem) => {
+      const isNecessary = offer.features.some(
+        (offerFeatures) => featureListItem.classList.contains(`popup__feature--${offerFeatures}`),
+      );
+      if (!isNecessary) {
+        featureListItem.remove();
+      }
+    });
+  } else {
+    features.remove();
+  }
 
-  const descriptionElement = cardElement.querySelector('.popup__description');
-  const photoElements = cardElement.querySelector('.popup__photos');
-  const photoElement = photoElements.querySelector('img');
+  const description = card.querySelector('.popup__description');
+  const photo = card.querySelector('.popup__photos');
 
-  setElementAvatar(author.avatar, avatarElement);
-  setElementValue(offer.title, titleElement);
-  setElementPrice(offer.price, priceElement);
-  setElementValue(offer.address, addressElement);
-  setElementCapacity(rooms, guests, capacityElement);
-  setElementTime(offer.checkin, offer.checkout, timeElement);
-  setElementValue(offer.type, typeElement);
-  setElementValue(offer.description, descriptionElement);
-  setElementPhotos(offer.photos.length, offer.photos, photoElements, photoElement);
-  return cardElement;
+  setElementAvatar(author.avatar, avatar);
+  setElementValue(offer.title, title);
+  setElementPrice(offer.price, price);
+  setElementValue(offer.address, address);
+  setElementCapacity(rooms, guests, capacity);
+  setElementTime(offer.checkin, offer.checkout, time);
+  setElementValue(offer.type, type);
+  setElementValue(offer.description, description);
+  setElementPhotos(offer.photos, photo);
+  return card;
 }
+
+export {getCard};

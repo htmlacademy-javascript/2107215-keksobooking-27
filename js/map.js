@@ -1,10 +1,7 @@
 import {getCard} from './popup.js';
-import {
-  ZOOM_DEFAULT,
-  COORDS_DIGITS
-} from './data.js';
+import {ZOOM_DEFAULT, COORDS_DIGITS} from './data.js';
 
-const addressInput = document.querySelector('#address');
+const address = document.querySelector('#address');
 
 const map = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(map);
@@ -32,7 +29,7 @@ const mainMarker = L.marker(
   }
 );
 
-export const initMap = (defaultCoords) => {
+const initMap = (defaultCoords) => {
   map.setView(defaultCoords, ZOOM_DEFAULT);
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -63,22 +60,35 @@ const createAdPinMarkers = (offers) => {
   });
 };
 
-export const setAddress = ({lat, lng}) => {
-  addressInput.value = `${lat.toFixed(COORDS_DIGITS)}, ${lng.toFixed(COORDS_DIGITS)}`;
+const setAddress = ({lat, lng}) => {
+  address.value = `${lat.toFixed(COORDS_DIGITS)}, ${lng.toFixed(COORDS_DIGITS)}`;
 };
 
-export const setOnMapLoad = (cd) => {
-  map.on('load', cd);
+const setOnMapLoad = (cb) => {
+  map.on('load', cb);
 };
 
-export const setOnMainPinMove = () => {
+const setOnMainPinMove = () => {
   mainMarker.on('move', ({target}) => {
     const newCoordinates = target.getLatLng();
     setAddress(newCoordinates);
   });
 };
 
-export const setAdPins = (offers) => {
+const setAdPins = (offers) => {
   markerGroup.clearLayers();
-  createAdPinMarkers(offers);
+  createAdPinMarkers(offers.slice(0, 10));
 };
+
+const resetMarker = (defaultCoords) => {
+  mainMarker.setLatLng({
+    lat: defaultCoords.lat,
+    lng: defaultCoords.lng
+  });
+  map.setView({
+    lat: defaultCoords.lat,
+    lng: defaultCoords.lng
+  }, ZOOM_DEFAULT);
+};
+
+export {initMap, setAddress, setOnMapLoad, setOnMainPinMove, setAdPins, resetMarker, map};
