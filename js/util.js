@@ -14,4 +14,14 @@ const getSentenceWithCount = (num, [form1, form2 = form1, form3 = form2]) => {
 
 const createSentenceWithCount = (num, forms) => `${num} ${getSentenceWithCount(num, forms)}`;
 
-export {createSentenceWithCount};
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {createSentenceWithCount, debounce};
