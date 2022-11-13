@@ -7,7 +7,7 @@ const roomsFilter = mapFilters.querySelector('#housing-rooms');
 const guestsFilter = mapFilters.querySelector('#housing-guests');
 const featuresFilter = mapFilters.querySelector('#housing-features');
 
-const PriceLimits= {
+const PriceLimits = {
   low: {
     min: 0,
     max: 9999,

@@ -9,7 +9,7 @@ import {useFilters} from './filter.js';
 deactivePage();
 
 getData((cards) => {
-  setAdPins(cards)
+  setAdPins(cards);
   useFilters(cards, setAdPins);
 }, () => {
   showAlert('Ошибка при загрузке данных');
