@@ -18,6 +18,9 @@ const submitButton = adForm.querySelector('.ad-form__submit');
 const resetButton = adForm.querySelector('.ad-form__reset');
 const fileAvatar = adForm.querySelector('#avatar');
 const avatarPreview = adForm.querySelector('.ad-form-header__preview img');
+const filePhoto = adForm.querySelector('#images');
+const photoPreviewHousing = adForm.querySelector('.ad-form__photo');
+const avatarDefault = avatarPreview.src;
 
 const guestsCapacity = {
   '1': ['1'],
@@ -76,6 +79,34 @@ pristine.addValidator(capacity, validateCapacity, capacityErrorMessage);
 pristine.addValidator(roomNumber, validateCapacity, roomNumberErrorMessage);
 pristine.addValidator(price, validateMinPrice, minPriceErrorMessage);
 
+fileAvatar.addEventListener('change', () => {
+  const file = fileAvatar.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    avatarPreview.src = URL.createObjectURL(file);
+  }
+});
+
+filePhoto.addEventListener('change', () => {
+  const file = filePhoto.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    photoPreviewHousing.innerHTML = '';
+    const photo = document.createElement('img');
+    photo.src = URL.createObjectURL(file);
+    photo.style.width = '100%';
+    photo.style.height = 'auto';
+    photoPreviewHousing.appendChild(photo);
+  }
+});
+
+const resetAllPhotos = () => {
+  avatarPreview.src = avatarDefault;
+  photoPreviewHousing.innerHTML = '';
+};
+
 const resetForm = () => {
   adForm.reset();
   slider.noUiSlider.set(0);
@@ -85,6 +116,7 @@ const resetForm = () => {
   resetMarker(DEFAULT_COORDS);
   map.closePopup();
   resetFilters();
+  resetAllPhotos();
 };
 
 function resetButtonClick(evt) {
@@ -133,13 +165,3 @@ noUiSlider.create(slider, {
 slider.noUiSlider.on('slide', () => {
   price.value = slider.noUiSlider.get();
 });
-
-fileAvatar.addEventListener('change', () => {
-  const file = fileAvatar.files[0];
-  const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-  if (matches) {
-    avatarPreview.src = URL.createObjectURL(file);
-  }
-});
-
