@@ -4,6 +4,8 @@ import {setAddress, resetMarker, map} from './map.js';
 import {DEFAULT_COORDS} from './data.js';
 import {resetFilters} from './filter.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const adForm = document.querySelector('.ad-form');
 const type = document.querySelector('#type');
 const price = document.querySelector('#price');
@@ -14,6 +16,10 @@ const timeout = adForm.querySelector('#timeout');
 const slider = adForm.querySelector('.ad-form__slider');
 const submitButton = adForm.querySelector('.ad-form__submit');
 const resetButton = adForm.querySelector('.ad-form__reset');
+const fileAvatar = adForm.querySelector('#avatar');
+const avatarPreview = adForm.querySelector('.ad-form-header__preview img');
+const photoChooser = adForm.querySelector('#images');
+const photoPlaceholder = adForm.querySelector('.ad-form__photo');
 
 const guestsCapacity = {
   '1': ['1'],
@@ -128,5 +134,14 @@ noUiSlider.create(slider, {
 
 slider.noUiSlider.on('slide', () => {
   price.value = slider.noUiSlider.get();
+});
+
+fileAvatar.addEventListener('change', () => {
+  const file = fileAvatar.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+    if (matches) {
+      avatarPreview.src = URL.createObjectURL(file);
+    }
 });
 
