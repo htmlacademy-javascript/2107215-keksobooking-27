@@ -4,11 +4,13 @@ import {setOnMapLoad, setOnMainPinMove, setAddress, setAdPins } from './map.js';
 import {DEFAULT_COORDS} from './data.js';
 import {getData} from './api.js';
 import {showAlert} from './message.js';
+import {useFilters} from './filter.js';
 
 deactivePage();
 
 getData((cards) => {
   setAdPins(cards);
+  useFilters(cards, setAdPins);
 }, () => {
   showAlert('Ошибка при загрузке данных');
 });

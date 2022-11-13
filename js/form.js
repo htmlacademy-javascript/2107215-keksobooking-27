@@ -18,12 +18,14 @@ function enableElement(classElement) {
   }
 }
 
-export function deactivePage() {
+function deactivePage() {
   disableElement(adForm);
   slider.setAttribute('disabled', true);
 }
 
-export function activePage() {
+function activePage() {
   enableElement(adForm);
   slider.removeAttribute('disabled');
 }
+
+export {activePage, deactivePage};
