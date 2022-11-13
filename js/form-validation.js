@@ -18,8 +18,6 @@ const submitButton = adForm.querySelector('.ad-form__submit');
 const resetButton = adForm.querySelector('.ad-form__reset');
 const fileAvatar = adForm.querySelector('#avatar');
 const avatarPreview = adForm.querySelector('.ad-form-header__preview img');
-// const photoChooser = adForm.querySelector('#images');
-// const photoPlaceholder = adForm.querySelector('.ad-form__photo');
 
 const guestsCapacity = {
   '1': ['1'],
