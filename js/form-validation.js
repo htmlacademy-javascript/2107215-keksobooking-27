@@ -102,7 +102,7 @@ filePhoto.addEventListener('change', () => {
   }
 });
 
-const resetAllPhotos = () => {
+const resetPhotos = () => {
   avatarPreview.src = avatarDefault;
   photoPreviewHousing.innerHTML = '';
 };
@@ -116,7 +116,7 @@ const resetForm = () => {
   resetMarker(DEFAULT_COORDS);
   map.closePopup();
   resetFilters();
-  resetAllPhotos();
+  resetPhotos();
 };
 
 function resetButtonClick(evt) {
