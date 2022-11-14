@@ -29,7 +29,7 @@ const guestsCapacity = {
   '100': ['0'],
 };
 
-const TypesMinPrice = {
+const typesMinPrice = {
   bungalow: 0,
   flat: 1000,
   hotel: 3000,
@@ -46,26 +46,26 @@ const pristine = new Pristine(adForm, {
 function validateCapacity() {
   return guestsCapacity[roomNumber.value].includes(capacity.value);
 }
-function roomNumberErrorMessage() {
+function setRoomNumberErrorMessage() {
   return 'Количество гостей не соответствует количеству комнат';
 }
 
-function capacityErrorMessage() {
+function setCapacityErrorMessage() {
   return 'Недопустимое количество гостей';
 }
 
 function validateMinPrice() {
-  return TypesMinPrice[type.value] <= price.value;
+  return typesMinPrice[type.value] <= price.value;
 }
-function minPriceErrorMessage() {
-  return `Минимальная цена для выбранного типа жилья ${TypesMinPrice[type.value]} руб.`;
+function setMinPriceErrorMessage() {
+  return `Минимальная цена для выбранного типа жилья ${typesMinPrice[type.value]} руб.`;
 }
 
 resetButton.addEventListener('click', (evt) => resetButtonClick(evt));
 capacity.addEventListener('change', () => pristine.validate(roomNumber));
 roomNumber.addEventListener('change', () => pristine.validate(capacity));
 type.addEventListener('change', () => {
-  price.placeholder = TypesMinPrice[type.value];
+  price.placeholder = typesMinPrice[type.value];
   pristine.validate(price);
 });
 timein.addEventListener('change', () => {
@@ -75,9 +75,9 @@ timeout.addEventListener('change', () => {
   timein.value = timeout.value;
 });
 
-pristine.addValidator(capacity, validateCapacity, capacityErrorMessage);
-pristine.addValidator(roomNumber, validateCapacity, roomNumberErrorMessage);
-pristine.addValidator(price, validateMinPrice, minPriceErrorMessage);
+pristine.addValidator(capacity, validateCapacity, setCapacityErrorMessage);
+pristine.addValidator(roomNumber, validateCapacity, setRoomNumberErrorMessage);
+pristine.addValidator(price, validateMinPrice, setMinPriceErrorMessage);
 
 fileAvatar.addEventListener('change', () => {
   const file = fileAvatar.files[0];
@@ -96,8 +96,9 @@ filePhoto.addEventListener('change', () => {
     photoPreviewHousing.innerHTML = '';
     const photo = document.createElement('img');
     photo.src = URL.createObjectURL(file);
-    photo.style.width = '100%';
-    photo.style.height = 'auto';
+    photo.style.width = '70px';
+    photo.style.height = '70px';
+    photo.style.textAlign = 'center';
     photoPreviewHousing.appendChild(photo);
   }
 });
@@ -110,7 +111,7 @@ const resetPhotos = () => {
 const resetForm = () => {
   adForm.reset();
   slider.noUiSlider.set(0);
-  price.placeholder = TypesMinPrice[type.value];
+  price.placeholder = typesMinPrice[type.value];
   pristine.reset();
   setAddress(DEFAULT_COORDS);
   resetMarker(DEFAULT_COORDS);

@@ -45,24 +45,24 @@ const showErrorMessage = () => {
 };
 
 function showAlert(message) {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = '9999';
-  alertContainer.style.left = 0;
-  alertContainer.style.top = 0;
-  alertContainer.style.position = 'fixed';
-  alertContainer.style.paddingTop = '28px';
-  alertContainer.style.paddingBottom = '28px';
-  alertContainer.style.width = '100%';
-  alertContainer.style.backgroundColor = 'white';
-  alertContainer.style.borderRadius = '2px';
-  alertContainer.style.border = '3px solid #fd8871';
-  alertContainer.style.fontSize = '30px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.textContent = message;
-  document.body.append(alertContainer);
+  const alertMessage = document.createElement('div');
+  alertMessage.style.zIndex = '9999';
+  alertMessage.style.left = 0;
+  alertMessage.style.top = 0;
+  alertMessage.style.position = 'fixed';
+  alertMessage.style.paddingTop = '28px';
+  alertMessage.style.paddingBottom = '28px';
+  alertMessage.style.width = '100%';
+  alertMessage.style.backgroundColor = 'white';
+  alertMessage.style.borderRadius = '2px';
+  alertMessage.style.border = '3px solid #fd8871';
+  alertMessage.style.fontSize = '30px';
+  alertMessage.style.textAlign = 'center';
+  alertMessage.textContent = message;
+  document.body.append(alertMessage);
 
   setTimeout(() => {
-    alertContainer.remove();
+    alertMessage.remove();
   }, ALERT_SHOW_TIME);
 }
 

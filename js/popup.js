@@ -2,56 +2,56 @@ import {createSentenceWithCount} from './util.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-function setElementValue (element, classElement) {
-  if (element) {
-    classElement.textContent = element;
+function setElementValue (value, element) {
+  if (value) {
+    element.textContent = value;
   } else {
-    classElement.remove();
+    element.remove();
   }
 }
 
-function setElementPrice (element, classElement) {
-  if (element) {
-    classElement.textContent = `${element} ₽/ночь`;
+function setElementPrice (price, element) {
+  if (price) {
+    element.textContent = `${price} ₽/ночь`;
   } else {
-    classElement.remove();
+    element.remove();
   }
 }
 
-function setElementCapacity (elementRooms, elementGuests, classElement) {
+function setElementCapacity (elementRooms, elementGuests, element) {
   if (elementRooms && elementGuests) {
-    classElement.textContent = `${elementRooms} для ${elementGuests}`;
+    element.textContent = `${elementRooms} для ${elementGuests}`;
   } else {
-    classElement.remove();
+    element.remove();
   }
 }
 
-function setElementTime (elementCheckin, elementCheckout, classElement) {
+function setElementTime (elementCheckin, elementCheckout, element) {
   if (elementCheckin && elementCheckout) {
-    classElement.textContent = `Заезд после ${elementCheckin}, выезд до ${elementCheckout}`;
+    element.textContent = `Заезд после ${elementCheckin}, выезд до ${elementCheckout}`;
   } else {
-    classElement.remove();
+    element.remove();
   }
 }
 
-function setElementAvatar (element, classElement) {
-  if (element) {
-    classElement.src = element;
+function setElementAvatar (avatar, element) {
+  if (avatar) {
+    element.src = avatar;
   } else {
-    classElement.remove();
+    element.remove();
   }
 }
 
-function setElementPhotos (element, classElements) {
-  if(!element) {
-    classElements.remove();
+function setElementPhotos (photos, element) {
+  if(!photos) {
+    element.remove();
   } else {
-    const photoElement = classElements.querySelector('img');
+    const photoElement = element.querySelector('img');
     photoElement.remove();
-    for(let i = 0; i < element.length; i++) {
+    for(let i = 0; i < photos.length; i++) {
       const photo = photoElement.cloneNode(true);
-      photo.src = element[i];
-      classElements.append(photo);
+      photo.src = photos[i];
+      element.append(photo);
     }
   }
 }

@@ -7,7 +7,7 @@ const roomsFilter = mapFilters.querySelector('#housing-rooms');
 const guestsFilter = mapFilters.querySelector('#housing-guests');
 const featuresFilter = mapFilters.querySelector('#housing-features');
 
-const PriceLimits = {
+const priceLimits = {
   low: {
     min: 0,
     max: 9999,
@@ -30,7 +30,7 @@ const filterType = ({offer}) => typeFilter.value === 'any'
   || offer.type === typeFilter.value;
 
 const filterPrice = ({offer}) => priceFilter.value === 'any'
-  || (offer.price >= PriceLimits[priceFilter.value].min && offer.price <= PriceLimits[priceFilter.value].max);
+  || (offer.price >= priceLimits[priceFilter.value].min && offer.price <= priceLimits[priceFilter.value].max);
 
 const filterRooms = ({offer}) => roomsFilter.value === 'any'
   || offer.rooms.toString() === roomsFilter.value;
@@ -43,7 +43,7 @@ const filterFeatures = ({offer}) => {
   if (!checkedFilters) {
     return true;
   }
-  if (offer.features){
+  if (offer.features) {
     return Array.from(checkedFilters).every((feature) => offer.features.includes(feature.value));
   }
   return false;
