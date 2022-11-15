@@ -15,12 +15,14 @@ const onCloseMessageClick = () => {
   successSubmitMessage.removeEventListener('click', onCloseMessageClick);
   document.removeEventListener('keydown', onMessageEscKeydown);
 };
+
 function onMessageEscKeydown (evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     onCloseMessageClick();
   }
 }
+
 const showMessage = () => {
   document.body.append(successSubmitMessage);
   successSubmitMessage.addEventListener('click', onCloseMessageClick);
@@ -32,19 +34,21 @@ const onErrorMessageClick = () => {
   document.removeEventListener('keydown', onErrorMessageEscKeydown);
   errorSubmitMessage.removeEventListener('click', onErrorMessageClick);
 };
+
 function onErrorMessageEscKeydown (evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     onErrorMessageClick();
   }
 }
+
 const showErrorMessage = () => {
   document.body.append(errorSubmitMessage);
   errorSubmitMessage.addEventListener('click', onErrorMessageClick);
   document.addEventListener('keydown', onErrorMessageEscKeydown);
 };
 
-function showAlert(message) {
+const showAlert = (message) => {
   const alertMessage = document.createElement('div');
   alertMessage.style.zIndex = '9999';
   alertMessage.style.left = 0;
@@ -64,6 +68,6 @@ function showAlert(message) {
   setTimeout(() => {
     alertMessage.remove();
   }, ALERT_SHOW_TIME);
-}
+};
 
 export {showErrorMessage, showMessage, showAlert};

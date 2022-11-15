@@ -1,12 +1,13 @@
 import {initMap} from './map.js';
-import {activePage, deactivePage} from './form.js';
+import {togglePageContent, deactiveSlider, activeSlider} from './form.js';
 import {setOnMapLoad, setOnMainPinMove, setAddress, setAdPins} from './map.js';
 import {DEFAULT_COORDS} from './data.js';
 import {getData} from './api.js';
 import {showAlert} from './message.js';
 import {useFilters} from './filter.js';
 
-deactivePage();
+togglePageContent(true);
+deactiveSlider();
 
 getData((cards) => {
   setAdPins(cards);
@@ -18,7 +19,8 @@ getData((cards) => {
 setOnMapLoad(() => {
   setOnMainPinMove();
   setAddress(DEFAULT_COORDS);
-  activePage();
+  togglePageContent(false);
+  activeSlider();
 });
 
 initMap(DEFAULT_COORDS);

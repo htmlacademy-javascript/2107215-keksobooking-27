@@ -18,17 +18,17 @@ function setElementPrice (price, element) {
   }
 }
 
-function setElementCapacity (elementRooms, elementGuests, element) {
-  if (elementRooms && elementGuests) {
-    element.textContent = `${elementRooms} для ${elementGuests}`;
+function setElementCapacity (rooms, guests, element) {
+  if (rooms && guests) {
+    element.textContent = `${rooms} для ${guests}`;
   } else {
     element.remove();
   }
 }
 
-function setElementTime (elementCheckin, elementCheckout, element) {
-  if (elementCheckin && elementCheckout) {
-    element.textContent = `Заезд после ${elementCheckin}, выезд до ${elementCheckout}`;
+function setElementTime (checkin, checkout, element) {
+  if (checkin && checkout) {
+    element.textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
   } else {
     element.remove();
   }
@@ -56,7 +56,7 @@ function setElementPhotos (photos, element) {
   }
 }
 
-function getCard(point) {
+function getCard (point) {
   const {author, offer} = point;
   const card = cardTemplate.cloneNode(true);
   const avatar = card.querySelector('.popup__avatar');

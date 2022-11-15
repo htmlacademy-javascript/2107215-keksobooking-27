@@ -43,21 +43,22 @@ const pristine = new Pristine(adForm, {
   errorTextParent: 'ad-form__element',
 },);
 
-function validateCapacity() {
+function validateCapacity () {
   return guestsCapacity[roomNumber.value].includes(capacity.value);
 }
-function setRoomNumberErrorMessage() {
+function setRoomNumberErrorMessage () {
   return 'Количество гостей не соответствует количеству комнат';
 }
 
-function setCapacityErrorMessage() {
+function setCapacityErrorMessage () {
   return 'Недопустимое количество гостей';
 }
 
-function validateMinPrice() {
+function validateMinPrice () {
   return typesMinPrice[type.value] <= price.value;
 }
-function setMinPriceErrorMessage() {
+
+function setMinPriceErrorMessage () {
   return `Минимальная цена для выбранного типа жилья ${typesMinPrice[type.value]} руб.`;
 }
 
@@ -103,6 +104,10 @@ filePhoto.addEventListener('change', () => {
   }
 });
 
+const toggleSubmitButtonState = (flag) => {
+  submitButton.disabled = flag;
+};
+
 const resetPhotos = () => {
   avatarPreview.src = avatarDefault;
   photoPreviewHousing.innerHTML = '';
@@ -120,25 +125,25 @@ const resetForm = () => {
   resetPhotos();
 };
 
-function resetButtonClick(evt) {
+function resetButtonClick (evt) {
   evt.preventDefault();
   resetForm();
 }
 
-adForm.addEventListener('submit', (evt)=>{
+adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {
-    submitButton.disabled = true;
+    toggleSubmitButtonState(true);
     sendData(
       () => {
         showMessage();
         resetForm();
-        submitButton.disabled = false;
+        toggleSubmitButtonState(false);
       },
       () => {
         showErrorMessage();
-        submitButton.disabled = false;
+        toggleSubmitButtonState(false);
       },
       new FormData(evt.target)
     );
