@@ -2,47 +2,47 @@ import {createSentenceWithCount} from './util.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-function setElementValue (value, element) {
+const setElementValue = (value, element) => {
   if (value) {
     element.textContent = value;
   } else {
     element.remove();
   }
-}
+};
 
-function setElementPrice (price, element) {
+const setElementPrice = (price, element) => {
   if (price) {
     element.textContent = `${price} ₽/ночь`;
   } else {
     element.remove();
   }
-}
+};
 
-function setElementCapacity (rooms, guests, element) {
+const setElementCapacity = (rooms, guests, element) => {
   if (rooms && guests) {
     element.textContent = `${rooms} для ${guests}`;
   } else {
     element.remove();
   }
-}
+};
 
-function setElementTime (checkin, checkout, element) {
+const setElementTime = (checkin, checkout, element) => {
   if (checkin && checkout) {
     element.textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
   } else {
     element.remove();
   }
-}
+};
 
-function setElementAvatar (avatar, element) {
+const setElementAvatar = (avatar, element) => {
   if (avatar) {
     element.src = avatar;
   } else {
     element.remove();
   }
-}
+};
 
-function setElementPhotos (photos, element) {
+const setElementPhotos = (photos, element) => {
   if(!photos) {
     element.remove();
   } else {
@@ -54,9 +54,9 @@ function setElementPhotos (photos, element) {
       element.append(photo);
     }
   }
-}
+};
 
-function getCard (point) {
+const getCard = (point) => {
   const {author, offer} = point;
   const card = cardTemplate.cloneNode(true);
   const avatar = card.querySelector('.popup__avatar');
@@ -97,6 +97,6 @@ function getCard (point) {
   setElementValue(offer.description, description);
   setElementPhotos(offer.photos, photo);
   return card;
-}
+};
 
 export {getCard};

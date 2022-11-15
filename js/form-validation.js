@@ -43,26 +43,16 @@ const pristine = new Pristine(adForm, {
   errorTextParent: 'ad-form__element',
 },);
 
-function validateCapacity () {
-  return guestsCapacity[roomNumber.value].includes(capacity.value);
-}
-function setRoomNumberErrorMessage () {
-  return 'Количество гостей не соответствует количеству комнат';
-}
+const validateCapacity = () => guestsCapacity[roomNumber.value].includes(capacity.value);
 
-function setCapacityErrorMessage () {
-  return 'Недопустимое количество гостей';
-}
+const setRoomNumberErrorMessage = () => 'Количество гостей не соответствует количеству комнат';
 
-function validateMinPrice () {
-  return typesMinPrice[type.value] <= price.value;
-}
+const setCapacityErrorMessage = () => 'Недопустимое количество гостей';
 
-function setMinPriceErrorMessage () {
-  return `Минимальная цена для выбранного типа жилья ${typesMinPrice[type.value]} руб.`;
-}
+const validateMinPrice = () => typesMinPrice[type.value] <= price.value;
 
-resetButton.addEventListener('click', (evt) => resetButtonClick(evt));
+const setMinPriceErrorMessage = () => `Минимальная цена для выбранного типа жилья ${typesMinPrice[type.value]} руб.`;
+
 capacity.addEventListener('change', () => pristine.validate(roomNumber));
 roomNumber.addEventListener('change', () => pristine.validate(capacity));
 type.addEventListener('change', () => {
@@ -125,10 +115,12 @@ const resetForm = () => {
   resetPhotos();
 };
 
-function resetButtonClick (evt) {
+const resetButtonClick = (evt) => {
   evt.preventDefault();
   resetForm();
-}
+};
+
+resetButton.addEventListener('click', (evt) => resetButtonClick(evt));
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
