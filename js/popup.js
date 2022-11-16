@@ -2,61 +2,61 @@ import {createSentenceWithCount} from './util.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-function setElementValue (element, classElement) {
-  if (element) {
-    classElement.textContent = element;
+const setElementValue = (value, element) => {
+  if (value) {
+    element.textContent = value;
   } else {
-    classElement.remove();
+    element.remove();
   }
-}
+};
 
-function setElementPrice (element, classElement) {
-  if (element) {
-    classElement.textContent = `${element} ₽/ночь`;
+const setElementPrice = (price, element) => {
+  if (price) {
+    element.textContent = `${price} ₽/ночь`;
   } else {
-    classElement.remove();
+    element.remove();
   }
-}
+};
 
-function setElementCapacity (elementRooms, elementGuests, classElement) {
-  if (elementRooms && elementGuests) {
-    classElement.textContent = `${elementRooms} для ${elementGuests}`;
+const setElementCapacity = (rooms, guests, element) => {
+  if (rooms && guests) {
+    element.textContent = `${rooms} для ${guests}`;
   } else {
-    classElement.remove();
+    element.remove();
   }
-}
+};
 
-function setElementTime (elementCheckin, elementCheckout, classElement) {
-  if (elementCheckin && elementCheckout) {
-    classElement.textContent = `Заезд после ${elementCheckin}, выезд до ${elementCheckout}`;
+const setElementTime = (checkin, checkout, element) => {
+  if (checkin && checkout) {
+    element.textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
   } else {
-    classElement.remove();
+    element.remove();
   }
-}
+};
 
-function setElementAvatar (element, classElement) {
-  if (element) {
-    classElement.src = element;
+const setElementAvatar = (avatar, element) => {
+  if (avatar) {
+    element.src = avatar;
   } else {
-    classElement.remove();
+    element.remove();
   }
-}
+};
 
-function setElementPhotos (element, classElements) {
-  if(!element) {
-    classElements.remove();
+const setElementPhotos = (photos, element) => {
+  if(!photos) {
+    element.remove();
   } else {
-    const photoElement = classElements.querySelector('img');
+    const photoElement = element.querySelector('img');
     photoElement.remove();
-    for(let i = 0; i < element.length; i++) {
+    for(let i = 0; i < photos.length; i++) {
       const photo = photoElement.cloneNode(true);
-      photo.src = element[i];
-      classElements.append(photo);
+      photo.src = photos[i];
+      element.append(photo);
     }
   }
-}
+};
 
-function getCard(point) {
+const getCard = (point) => {
   const {author, offer} = point;
   const card = cardTemplate.cloneNode(true);
   const avatar = card.querySelector('.popup__avatar');
@@ -97,6 +97,6 @@ function getCard(point) {
   setElementValue(offer.description, description);
   setElementPhotos(offer.photos, photo);
   return card;
-}
+};
 
 export {getCard};

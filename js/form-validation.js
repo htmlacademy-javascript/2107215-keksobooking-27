@@ -29,7 +29,7 @@ const guestsCapacity = {
   '100': ['0'],
 };
 
-const TypesMinPrice = {
+const typesMinPrice = {
   bungalow: 0,
   flat: 1000,
   hotel: 3000,
@@ -43,29 +43,20 @@ const pristine = new Pristine(adForm, {
   errorTextParent: 'ad-form__element',
 },);
 
-function validateCapacity() {
-  return guestsCapacity[roomNumber.value].includes(capacity.value);
-}
-function roomNumberErrorMessage() {
-  return 'Количество гостей не соответствует количеству комнат';
-}
+const validateCapacity = () => guestsCapacity[roomNumber.value].includes(capacity.value);
 
-function capacityErrorMessage() {
-  return 'Недопустимое количество гостей';
-}
+const setRoomNumberErrorMessage = () => 'Количество гостей не соответствует количеству комнат';
 
-function validateMinPrice() {
-  return TypesMinPrice[type.value] <= price.value;
-}
-function minPriceErrorMessage() {
-  return `Минимальная цена для выбранного типа жилья ${TypesMinPrice[type.value]} руб.`;
-}
+const setCapacityErrorMessage = () => 'Недопустимое количество гостей';
 
-resetButton.addEventListener('click', (evt) => resetButtonClick(evt));
+const validateMinPrice = () => typesMinPrice[type.value] <= price.value;
+
+const setMinPriceErrorMessage = () => `Минимальная цена для выбранного типа жилья ${typesMinPrice[type.value]} руб.`;
+
 capacity.addEventListener('change', () => pristine.validate(roomNumber));
 roomNumber.addEventListener('change', () => pristine.validate(capacity));
 type.addEventListener('change', () => {
-  price.placeholder = TypesMinPrice[type.value];
+  price.placeholder = typesMinPrice[type.value];
   pristine.validate(price);
 });
 timein.addEventListener('change', () => {
@@ -75,9 +66,9 @@ timeout.addEventListener('change', () => {
   timein.value = timeout.value;
 });
 
-pristine.addValidator(capacity, validateCapacity, capacityErrorMessage);
-pristine.addValidator(roomNumber, validateCapacity, roomNumberErrorMessage);
-pristine.addValidator(price, validateMinPrice, minPriceErrorMessage);
+pristine.addValidator(capacity, validateCapacity, setCapacityErrorMessage);
+pristine.addValidator(roomNumber, validateCapacity, setRoomNumberErrorMessage);
+pristine.addValidator(price, validateMinPrice, setMinPriceErrorMessage);
 
 fileAvatar.addEventListener('change', () => {
   const file = fileAvatar.files[0];
@@ -96,11 +87,16 @@ filePhoto.addEventListener('change', () => {
     photoPreviewHousing.innerHTML = '';
     const photo = document.createElement('img');
     photo.src = URL.createObjectURL(file);
-    photo.style.width = '100%';
-    photo.style.height = 'auto';
+    photo.style.width = '70px';
+    photo.style.height = '70px';
+    photo.style.textAlign = 'center';
     photoPreviewHousing.appendChild(photo);
   }
 });
+
+const toggleSubmitButtonState = (flag) => {
+  submitButton.disabled = flag;
+};
 
 const resetPhotos = () => {
   avatarPreview.src = avatarDefault;
@@ -110,7 +106,7 @@ const resetPhotos = () => {
 const resetForm = () => {
   adForm.reset();
   slider.noUiSlider.set(0);
-  price.placeholder = TypesMinPrice[type.value];
+  price.placeholder = typesMinPrice[type.value];
   pristine.reset();
   setAddress(DEFAULT_COORDS);
   resetMarker(DEFAULT_COORDS);
@@ -119,25 +115,27 @@ const resetForm = () => {
   resetPhotos();
 };
 
-function resetButtonClick(evt) {
+const resetButtonClick = (evt) => {
   evt.preventDefault();
   resetForm();
-}
+};
 
-adForm.addEventListener('submit', (evt)=>{
+resetButton.addEventListener('click', (evt) => resetButtonClick(evt));
+
+adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {
-    submitButton.disabled = true;
+    toggleSubmitButtonState(true);
     sendData(
       () => {
         showMessage();
         resetForm();
-        submitButton.disabled = false;
+        toggleSubmitButtonState(false);
       },
       () => {
         showErrorMessage();
-        submitButton.disabled = false;
+        toggleSubmitButtonState(false);
       },
       new FormData(evt.target)
     );
