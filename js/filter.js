@@ -43,10 +43,8 @@ const filterFeatures = ({offer}) => {
   if (!checkedFilters) {
     return true;
   }
-  if (offer.features) {
-    return Array.from(checkedFilters).every((feature) => offer.features.includes(feature.value));
-  }
-  return false;
+
+  return offer.features ? Array.from(checkedFilters).every((feature) => offer.features.includes(feature.value)) : false;
 };
 
 const filterOffers = (element) =>
